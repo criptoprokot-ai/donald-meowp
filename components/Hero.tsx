@@ -43,6 +43,19 @@ const heroStyles = `
     0%, 100% { transform: translateX(0); }
     50% { transform: translateX(8px); }
   }
+  
+  /* Mobile adjustments: remove overlapping decorations and make giveaway flow */
+  @media (max-width: 768px) {
+    .giveaway-wrapper { position: static !important; left: auto !important; top: auto !important; transform: none !important; margin: 20px auto; width: 100%; display:flex; justify-content:center; }
+    .giveaway-overlay, .comic-arrow { display: none !important; }
+    .giveaway-card { width: calc(100% - 32px) !important; max-width: 480px; height: auto !important; padding: 16px !important; }
+    .comic-frame { transform: none !important; -webkit-transform: none !important; }
+    .comic-frame > .badge-bottom, .comic-frame > .badge-top { position: static !important; transform: none !important; margin-top: 12px; margin-right: 0; margin-left: 0; }
+    .halftone, .blur-[120px], .-z-10 { display: none !important; }
+    section { padding-top: calc(56px + env(safe-area-inset-top)); padding-bottom: env(safe-area-inset-bottom); }
+    h1.font-comic { font-size: clamp(2rem, 8vw, 4.5rem); line-height: 1; }
+    .p-6 { padding: 12px !important; }
+  }
 `;
 
 export const Hero: React.FC = () => {
@@ -83,7 +96,7 @@ export const Hero: React.FC = () => {
         </div>
 
         {/* Giveaway Promo Box - Repositioned */}
-        <div className="absolute left-1/3 top-12 transform -translate-x-1/2 translate-x-4 translate-y-2 z-30">
+        <div className="giveaway-wrapper absolute left-1/3 top-12 transform -translate-x-1/2 translate-x-4 translate-y-2 z-30">
           {/* Visual contrast overlay - soft glow behind card */}
           <div className="giveaway-overlay"></div>
           
@@ -121,17 +134,17 @@ export const Hero: React.FC = () => {
 
         <div className="relative z-10 flex justify-center items-center order-1 lg:order-2">
            <div className="absolute -z-10 w-[140%] h-[140%] bg-[#D4AF37] rounded-full blur-[120px] opacity-25"></div>
-           <div className="relative comic-border p-3 bg-white comic-shadow -rotate-2 transform transition-transform hover:rotate-0 duration-500">
+           <div className="comic-frame relative comic-border p-3 bg-white comic-shadow -rotate-2 transform transition-transform hover:rotate-0 duration-500">
              <img 
                src={ASSETS.meowp} 
                alt="Donald Meowp - Best Cat" 
                className="w-full max-w-[480px] h-auto object-cover border-2 border-black" 
              />
-             <div className="absolute -bottom-12 -right-6 bg-black text-white comic-border p-5 comic-shadow z-20 transform rotate-3">
+             <div className="badge-bottom absolute -bottom-12 -right-6 bg-black text-white comic-border p-5 comic-shadow z-20 transform rotate-3">
                <p className="font-comic text-3xl leading-tight text-[#D4AF37] uppercase tracking-tighter">THE BEST CAT!</p>
              </div>
-             <div className="absolute -top-10 -left-6 bg-[#D12B2B] text-white comic-border px-4 py-2 comic-shadow z-20">
-               <p className="font-bold text-xs uppercase tracking-widest">$CATL PRIDE</p>
+             <div className="badge-top absolute -top-10 -left-6 bg-[#D12B2B] text-white comic-border px-4 py-2 comic-shadow z-20">
+               <p className="font-bold text-xs uppercase tracking-widest">$MEOWP PRIDE</p>
              </div>
            </div>
         </div>

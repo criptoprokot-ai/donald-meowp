@@ -76,7 +76,7 @@ export const TokenLaunch: React.FC = () => {
           </div>
           <div className="bg-white/5 p-4 comic-border border-white/10">
             <p className="text-[#D4AF37] text-[10px] font-black uppercase">Ticker</p>
-            <p className="font-bold text-lg">$CATL</p>
+            <p className="font-bold text-lg">$MEOWP</p>
           </div>
           <div className="col-span-2 md:col-span-1 bg-white/5 p-4 comic-border border-white/10">
             <p className="text-[#D4AF37] text-[10px] font-black uppercase">Status</p>

@@ -15,7 +15,7 @@ export const About: FC = () => {
             "No utility. No roadmap. Just memes, culture, and a very confident cat. We're going to build a wall around the litter box and make the dogs pay for it."
           </p>
           <p className="text-sm text-gray-500 italic">
-            Disclaimer: For entertainment purposes only. Not financial advice. $CATL is a meme coin with no intrinsic value or expectation of financial return. Rules may vary by jurisdiction. Participation void where prohibited.
+            Disclaimer: For entertainment purposes only. Not financial advice. $MEOWP is a meme coin with no intrinsic value or expectation of financial return. Rules may vary by jurisdiction. Participation void where prohibited.
           </p>
         </div>
       </div>

@@ -4,7 +4,7 @@ import React from 'react';
 const phases = [
   { phase: 'Phase 1', title: 'The Arrival', desc: 'Comic drop, Stickers released, Community foundations.' },
   { phase: 'Phase 2', title: 'Golden Deals', desc: 'Marketing blast, Meme engine start, Community growth.' },
-  { phase: 'Phase 3', title: 'The Great House', desc: '$CATL Token launch on Solana via Pump.fun.' },
+  { phase: 'Phase 3', title: 'The Great House', desc: '$MEOWP Token launch on Solana via Pump.fun.' },
   { phase: 'Phase 4', title: 'Full Issue', desc: 'Release of the complete comic edition for holders.' },
   { phase: 'Phase 5', title: 'Expansion', desc: 'Chapter 2, Merch store, Global Meowp collabs.' },
 ];
