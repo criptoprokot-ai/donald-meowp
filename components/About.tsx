@@ -12,7 +12,7 @@ export const About: FC = () => {
             Tired of the low-quality laser pointers and subpar kibble of the current administration, Meowp has decided to take matters into his own paws.
           </p>
           <p className="bg-[#f3f2ef] p-6 comic-border border-dashed border-2">
-            "No utility. No roadmap. Just memes, culture, and a very confident cat. We're going to build a wall around the litter box and make the dogs pay for it."
+            "Just memes, culture, and a very confident cat. We're going to build a wall around the litter box and make the dogs pay for it."
           </p>
           <p className="text-sm text-gray-500 italic">
             Disclaimer: For entertainment purposes only. Not financial advice. $MEOWP is a meme coin with no intrinsic value or expectation of financial return. Rules may vary by jurisdiction. Participation void where prohibited.
