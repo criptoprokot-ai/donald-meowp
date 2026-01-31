@@ -59,7 +59,7 @@ export const TokenLaunch: React.FC = () => {
         ) : (
           <div className="space-y-8">
             <div className="bg-[#D12B2B] inline-block px-12 py-4 comic-border animate-pulse transform -rotate-2">
-               <span className="font-comic text-5xl uppercase text-white">LAUNCHED NOW!</span>
+               <span className="font-comic text-5xl uppercase text-white">February 14</span>
             </div>
             <div className="flex flex-wrap justify-center gap-6 pt-4">
               <a href={LINKS.pump} className="bg-[#D4AF37] text-black px-8 py-4 comic-border font-comic text-2xl comic-shadow-hover transition-all">BUY / CHART</a>
