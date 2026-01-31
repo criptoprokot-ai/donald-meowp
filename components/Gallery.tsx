@@ -80,7 +80,7 @@ export const Gallery: React.FC = () => {
       {/* Chapter section - Price of the Sun (locked panels) */}
       <div className="mt-12 text-center">
         <div className="mb-6">
-          <div className="inline-block bg-[#D12B2B] text-white px-6 py-2 comic-border mb-4 font-comic font-black uppercase tracking-wide">CHAPTER I</div>
+          <div className="inline-block bg-[#D12B2B] text-white px-6 py-2 comic-border mb-4 font-comic font-black uppercase tracking-wide">CHAPTER II</div>
           <h3 className="font-comic text-5xl md:text-6xl uppercase">THE PRICE OF THE SUN</h3>
           <div className="mt-2 mb-6 flex items-center justify-center">
             <div className="h-1 bg-black w-1/4"></div>
