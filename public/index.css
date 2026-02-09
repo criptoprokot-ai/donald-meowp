@@ -1,0 +1,41 @@
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #fff9e6;
+}
+
+.font-comic {
+  font-family: 'Bangers', system-ui;
+}
+
+.halftone {
+  background-image: radial-gradient(#000 1px, transparent 1px);
+  background-size: 4px 4px;
+  opacity: 0.05;
+}
+
+.comic-border {
+  border: 4px solid #000;
+}
+
+.comic-shadow {
+  box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 1);
+}
+
+.comic-shadow-hover:hover {
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+  transform: translate(4px, 4px);
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
