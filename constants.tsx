@@ -79,5 +79,5 @@ export const ASSETS = {
   panels: COMIC_PANELS,
 };
 
-// Token launch: 2026-02-14 22:00 MSK (UTC+3).
+// Token launch: 2026-02-14 22:00 UTC+3 (equals 2026-02-14 2:00 PM ET).
 export const LAUNCH_DATE: number | null = new Date('2026-02-14T22:00:00+03:00').getTime();
