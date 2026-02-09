@@ -42,7 +42,7 @@ const App: React.FC = () => {
       
       <Header />
       
-      <main className="relative z-10 pt-20">
+      <main className="relative z-10" style={{ paddingTop: 'calc(5rem + env(safe-area-inset-top))' }}>
         <Hero />
         
         <div className="container mx-auto px-4 space-y-24 pb-24">

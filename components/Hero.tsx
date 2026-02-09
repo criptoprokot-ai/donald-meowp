@@ -8,19 +8,19 @@ const heroStyles = `
     50% { transform: translateY(-6px); }
   }
   
-  .giveaway-card {
+  .hero-scope .giveaway-card {
     animation: float-up-down 3.5s ease-in-out infinite;
     transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
   }
   
-  .giveaway-card:hover {
+  .hero-scope .giveaway-card:hover {
     transform: scale(1.03);
     box-shadow: 12px 12px 0px 0px rgba(0,0,0,0.8), 
                 0 0 20px rgba(209, 43, 43, 0.3);
     animation-play-state: paused;
   }
   
-  .giveaway-overlay {
+  .hero-scope .giveaway-overlay {
     position: absolute;
     top: 0;
     left: -120px;
@@ -33,7 +33,7 @@ const heroStyles = `
     pointer-events: none;
   }
   
-  .comic-arrow {
+  .hero-scope .comic-arrow {
     position: absolute;
     font-size: 32px;
     animation: bounce-arrow 2s ease-in-out infinite;
@@ -46,15 +46,12 @@ const heroStyles = `
   
   /* Mobile adjustments: remove overlapping decorations and make giveaway flow */
   @media (max-width: 768px) {
-    .giveaway-wrapper { position: static !important; left: auto !important; top: auto !important; transform: none !important; margin: 20px auto; width: 100%; display:flex; justify-content:center; }
-    .giveaway-overlay, .comic-arrow { display: none !important; }
-    .giveaway-card { width: calc(100% - 32px) !important; max-width: 480px; height: auto !important; padding: 16px !important; }
-    .comic-frame { transform: none !important; -webkit-transform: none !important; }
-    .comic-frame > .badge-bottom, .comic-frame > .badge-top { position: static !important; transform: none !important; margin-top: 12px; margin-right: 0; margin-left: 0; }
-    .halftone, .blur-[120px], .-z-10 { display: none !important; }
-    section { padding-top: calc(56px + env(safe-area-inset-top)); padding-bottom: env(safe-area-inset-bottom); }
-    h1.font-comic { font-size: clamp(2rem, 8vw, 4.5rem); line-height: 1; }
-    .p-6 { padding: 12px !important; }
+    .hero-scope .giveaway-wrapper { position: static !important; left: auto !important; top: auto !important; transform: none !important; margin: 20px auto; width: 100%; display:flex; justify-content:center; }
+    .hero-scope .giveaway-overlay, .hero-scope .comic-arrow { display: none !important; }
+    .hero-scope .giveaway-card { width: calc(100% - 32px) !important; max-width: 480px; height: auto !important; padding: 16px !important; }
+    .hero-scope .comic-frame { transform: none !important; -webkit-transform: none !important; }
+    .hero-scope .comic-frame > .badge-bottom, .hero-scope .comic-frame > .badge-top { position: static !important; transform: none !important; margin-top: 12px; margin-right: 0; margin-left: 0; }
+    .hero-scope .hero-halftone, .hero-scope .hero-glow { display: none !important; }
   }
 `;
 
@@ -62,19 +59,19 @@ export const Hero: React.FC = () => {
   return (
     <>
       <style>{heroStyles}</style>
-      <section className="relative min-h-[85vh] flex items-center justify-center overflow-visible py-20 px-4">
+      <section className="hero-scope relative min-h-[85vh] flex items-center justify-center overflow-visible py-16 md:py-20 px-4">
       <div className="container mx-auto grid lg:grid-cols-2 gap-12 items-center relative">
         <div className="z-20 text-center lg:text-left space-y-8 order-2 lg:order-1">
           <div className="inline-block bg-black text-white px-4 py-1 comic-border mb-4">
              <span className="font-bold text-sm uppercase tracking-widest">Political Satire Comic Universe</span>
           </div>
-          <h1 className="font-comic text-7xl lg:text-9xl leading-[0.8] tracking-tighter text-black uppercase">
+          <h1 className="font-comic text-6xl sm:text-7xl lg:text-9xl leading-[0.8] tracking-tighter text-black uppercase">
             MAKE <br />
             <span className="text-[#D4AF37] drop-shadow-[4px_4px_0px_#000]">CATLANDIA</span> <br />
             GREAT AGAIN
           </h1>
           
-          <p className="text-xl font-bold max-w-md mx-auto lg:mx-0 bg-white/50 backdrop-blur-sm p-6 comic-border border-dashed border-2 relative">
+          <p className="text-xl font-bold max-w-md mx-auto lg:mx-0 bg-white/50 backdrop-blur-sm p-4 md:p-6 comic-border border-dashed border-2 relative">
             <span className="absolute -top-4 -left-4 text-4xl text-[#D12B2B]">“</span>
             "The dogs are at the gates, and the litter boxes are empty. It's time for a Very Confident Cat to take charge. Believe me, it's going to be huge."
             <span className="absolute -bottom-4 -right-4 text-4xl text-[#D12B2B]">”</span>
@@ -122,7 +119,7 @@ export const Hero: React.FC = () => {
               href="#giveaway" 
               className="bg-[#D12B2B] text-white px-8 py-4 comic-border comic-shadow comic-shadow-hover font-comic text-xl tracking-widest uppercase transition-all transform hover:scale-110 active:scale-95 text-center"
             >
-              🎁 JOIN GIVEAWAY
+              JOIN GIVEAWAY
             </a>
             
             {/* Text - Below button */}
@@ -133,7 +130,7 @@ export const Hero: React.FC = () => {
         </div>
 
         <div className="relative z-10 flex justify-center items-center order-1 lg:order-2">
-           <div className="absolute -z-10 w-[140%] h-[140%] bg-[#D4AF37] rounded-full blur-[120px] opacity-25"></div>
+           <div className="hero-glow absolute -z-10 w-[140%] h-[140%] bg-[#D4AF37] rounded-full blur-[120px] opacity-25"></div>
            <div className="comic-frame relative comic-border p-3 bg-white comic-shadow -rotate-2 transform transition-transform hover:rotate-0 duration-500">
              <img 
                src={ASSETS.meowp} 
@@ -151,8 +148,8 @@ export const Hero: React.FC = () => {
       </div>
       
       {/* Decorative halftone patterns */}
-      <div className="absolute top-40 right-10 w-32 h-32 halftone opacity-20 -z-10"></div>
-      <div className="absolute bottom-20 left-10 w-48 h-48 halftone opacity-10 -z-10"></div>
+      <div className="hero-halftone absolute top-40 right-10 w-32 h-32 halftone opacity-20 -z-10"></div>
+      <div className="hero-halftone absolute bottom-20 left-10 w-48 h-48 halftone opacity-10 -z-10"></div>
     </section>
     </>
   );

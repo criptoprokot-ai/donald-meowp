@@ -36,14 +36,14 @@ export const StickerPack: React.FC = () => {
             {/* Sticker 1 */}
             <div className="sm:absolute top-0 left-0 transform sm:-rotate-12 hover:rotate-0 transition-transform duration-300 z-10">
               <div className="bg-white p-2 comic-border comic-shadow rounded-xl overflow-hidden w-48 h-48 md:w-64 md:h-64">
-                <img src={ASSETS.stickers[0]} className="w-full h-full object-cover" alt="Sticker 1" />
+                <img src={ASSETS.stickers[0]} className="w-full h-full object-cover" alt="Sticker 1" loading="lazy" decoding="async" />
               </div>
             </div>
             
             {/* Sticker 2 */}
             <div className="sm:absolute top-1/2 left-1/2 transform sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rotate-6 hover:rotate-0 transition-transform duration-300 z-30">
               <div className="bg-white p-2 comic-border comic-shadow rounded-xl overflow-hidden w-56 h-56 md:w-72 md:h-72">
-                <img src={ASSETS.stickers[1]} className="w-full h-full object-cover" alt="Sticker 2" />
+                <img src={ASSETS.stickers[1]} className="w-full h-full object-cover" alt="Sticker 2" loading="lazy" decoding="async" />
                 <div className="absolute top-2 right-2 bg-[#D12B2B] text-white text-[10px] font-black px-2 py-0.5 uppercase">Elite</div>
               </div>
             </div>
@@ -51,7 +51,7 @@ export const StickerPack: React.FC = () => {
             {/* Sticker 3 */}
             <div className="sm:absolute bottom-0 right-0 transform sm:rotate-12 hover:rotate-0 transition-transform duration-300 z-20">
               <div className="bg-white p-2 comic-border comic-shadow rounded-xl overflow-hidden w-48 h-48 md:w-64 md:h-64">
-                <img src={ASSETS.stickers[2]} className="w-full h-full object-cover" alt="Sticker 3" />
+                <img src={ASSETS.stickers[2]} className="w-full h-full object-cover" alt="Sticker 3" loading="lazy" decoding="async" />
               </div>
             </div>
 

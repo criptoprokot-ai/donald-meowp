@@ -4,8 +4,6 @@ import { GiveawayEntry } from '../types';
 
 export const Giveaway: React.FC = () => {
   const [wallet, setWallet] = useState('');
-  const [xHandle, setXHandle] = useState('');
-  const [proofLink, setProofLink] = useState('');
   const [entries, setEntries] = useState<GiveawayEntry[]>([]);
   const [submitted, setSubmitted] = useState(false);
 
@@ -29,8 +27,6 @@ export const Giveaway: React.FC = () => {
     localStorage.setItem('catlandia_entries', JSON.stringify(updated));
     setSubmitted(true);
     setWallet('');
-    setXHandle('');
-    setProofLink('');
     setTimeout(() => setSubmitted(false), 3000);
   };
 
@@ -41,7 +37,7 @@ export const Giveaway: React.FC = () => {
          <p className="mt-4 font-bold text-xl uppercase italic">WE WIN, YOU WIN. BELIEVE ME.</p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-12">
+      <div className="grid grid-cols-1 gap-12 max-w-4xl mx-auto">
         {/* Giveaway #1 */}
         <div className="bg-white comic-border p-8 comic-shadow flex flex-col justify-between">
           <div className="space-y-4">
@@ -75,46 +71,6 @@ export const Giveaway: React.FC = () => {
                 SUBMIT ENTRY
               </button>
             </form>
-          </div>
-        </div>
-
-        {/* Giveaway #2 */}
-        <div className="bg-black text-white comic-border p-8 comic-shadow">
-          <div className="space-y-4">
-            <h3 className="font-comic text-4xl text-[#D4AF37]">GIVEAWAY #2: THE GOLDEN DEAL</h3>
-            <p className="font-bold text-[#D4AF37]">1 WINNER — 10 SOL</p>
-            <p className="text-sm text-gray-400">Our biggest reward yet. Points are awarded for community loyalty and engagement.</p>
-            
-            <form onSubmit={(e) => handleSubmit(e, 'premium')} className="space-y-4 mt-6">
-              <input 
-                type="text" 
-                placeholder="Solana Wallet Address" 
-                value={wallet}
-                onChange={(e) => setWallet(e.target.value)}
-                className="w-full comic-border p-3 font-bold text-black" 
-                required
-              />
-              <input 
-                type="text" 
-                placeholder="Your X handle (optional)" 
-                value={xHandle}
-                onChange={(e) => setXHandle(e.target.value)}
-                className="w-full comic-border p-3 font-bold text-black" 
-              />
-              <input 
-                type="url" 
-                placeholder="Proof link (optional)" 
-                value={proofLink}
-                onChange={(e) => setProofLink(e.target.value)}
-                className="w-full comic-border p-3 font-bold text-black" 
-              />
-              <button className="w-full bg-[#D4AF37] text-black p-4 font-comic text-2xl uppercase hover:bg-white transition-colors">
-                CLAIM YOUR SHARE
-              </button>
-            </form>
-            <p className="text-[10px] text-gray-500 uppercase italic pt-4">
-              Points from: joining TG, following X, lore contributions. Rules may vary by jurisdiction. Participation void where prohibited.
-            </p>
           </div>
         </div>
       </div>

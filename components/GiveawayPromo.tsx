@@ -1,5 +1,4 @@
 import React from 'react';
-import { LINKS } from '../constants';
 
 export const GiveawayPromo: React.FC = () => {
   return (

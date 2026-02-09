@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { COLORS } from '../constants';
 
 export const Header: React.FC = () => {
   return (
@@ -21,7 +20,7 @@ export const Header: React.FC = () => {
           <a href="#token" className="hidden md:block font-bold hover:underline">TOKEN</a>
           <a href="#comic" className="hidden md:block font-bold hover:underline">COMIC</a>
           <a href="#giveaway" className="bg-[#D12B2B] text-white px-4 py-2 min-h-[44px] flex items-center justify-center comic-border font-bold text-sm transition-transform active:scale-95 rounded-md">
-            JOIN WIN
+            JOIN GIVEAWAY
           </a>
         </div>
       </div>

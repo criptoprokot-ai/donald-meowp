@@ -1,37 +1,63 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { LAUNCH_DATE, LINKS } from '../constants';
 
+type Countdown = {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+};
+
+const isRealLink = (url: string) => Boolean(url) && url !== '#' && !url.includes('placeholder');
+
+const formatLaunchTimeMsk = (ts: number) => {
+  try {
+    return new Intl.DateTimeFormat('en-GB', {
+      dateStyle: 'medium',
+      timeStyle: 'short',
+      timeZone: 'Europe/Moscow',
+    }).format(new Date(ts));
+  } catch {
+    return new Date(ts).toLocaleString();
+  }
+};
+
 export const TokenLaunch: React.FC = () => {
-  const [timeLeft, setTimeLeft] = useState<{
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-    isLaunched: boolean;
-  }>({ days: 0, hours: 0, minutes: 0, seconds: 0, isLaunched: false });
+  const launchDate =
+    typeof LAUNCH_DATE === 'number' && Number.isFinite(LAUNCH_DATE) && LAUNCH_DATE > 0 ? LAUNCH_DATE : null;
+
+  const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = LAUNCH_DATE - now;
+    if (!launchDate) return;
+    const id = window.setInterval(() => setNow(Date.now()), 1000);
+    return () => window.clearInterval(id);
+  }, [launchDate]);
 
-      if (distance < 0) {
-        setTimeLeft(prev => ({ ...prev, isLaunched: true }));
-        clearInterval(timer);
-        return;
-      }
+  const isLaunched = launchDate ? now >= launchDate : false;
 
-      setTimeLeft({
-        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-        seconds: Math.floor((distance % (1000 * 60)) / 1000),
-        isLaunched: false
-      });
-    }, 1000);
+  const launchLabel = launchDate ? `${formatLaunchTimeMsk(launchDate)} (MSK)` : 'TBA';
 
-    return () => clearInterval(timer);
+  const countdown: Countdown | null = useMemo(() => {
+    if (!launchDate || isLaunched) return null;
+    const distance = launchDate - now;
+    return {
+      days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+      minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+      seconds: Math.floor((distance % (1000 * 60)) / 1000),
+    };
+  }, [isLaunched, launchDate, now]);
+
+  const statusLabel = isLaunched ? 'ACTIVE' : launchDate ? 'PRE-LAUNCH' : 'COMING SOON';
+
+  const liveLinks = useMemo(() => {
+    return [
+      { label: 'BUY / CHART', href: LINKS.pump, className: 'bg-[#D4AF37] text-black' },
+      { label: 'DEXSCREENER', href: LINKS.dex, className: 'bg-white text-black' },
+      { label: 'RAYDIUM', href: LINKS.raydium, className: 'bg-white text-black' },
+    ].filter((l) => isRealLink(l.href));
   }, []);
 
   return (
@@ -39,15 +65,32 @@ export const TokenLaunch: React.FC = () => {
       <div className="text-center space-y-10">
         <h2 className="font-comic text-6xl text-[#D4AF37] uppercase">TOKEN LAUNCH</h2>
         
-        {!timeLeft.isLaunched ? (
+        {!launchDate ? (
           <div className="space-y-6">
-            <p className="text-2xl font-bold uppercase tracking-widest text-red-500">07 February, 22:00 MSK</p>
+            <div className="inline-block bg-[#D12B2B] text-white px-10 py-3 comic-border transform -rotate-1">
+              <span className="font-comic text-4xl uppercase">COMING SOON</span>
+            </div>
+            <p className="text-lg font-bold uppercase tracking-widest text-[#D4AF37]">Launch time: {launchLabel}</p>
+            <div className="flex flex-wrap justify-center gap-6 pt-2">
+              <a
+                href={LINKS.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white text-black px-8 py-4 comic-border font-comic text-2xl comic-shadow-hover transition-all"
+              >
+                JOIN TELEGRAM FOR UPDATES
+              </a>
+            </div>
+          </div>
+        ) : !isLaunched && countdown ? (
+          <div className="space-y-6">
+            <p className="text-2xl font-bold uppercase tracking-widest text-red-500">{launchLabel}</p>
             <div className="flex flex-wrap justify-center gap-4 sm:gap-8">
               {[
-                { label: 'DAYS', value: timeLeft.days },
-                { label: 'HOURS', value: timeLeft.hours },
-                { label: 'MINS', value: timeLeft.minutes },
-                { label: 'SECS', value: timeLeft.seconds },
+                { label: 'DAYS', value: countdown.days },
+                { label: 'HOURS', value: countdown.hours },
+                { label: 'MINS', value: countdown.minutes },
+                { label: 'SECS', value: countdown.seconds },
               ].map(unit => (
                 <div key={unit.label} className="bg-white text-black comic-border p-4 w-20 sm:w-28 comic-shadow transition-transform hover:-translate-y-1">
                   <div className="font-comic text-4xl sm:text-5xl">{unit.value.toString().padStart(2, '0')}</div>
@@ -55,16 +98,45 @@ export const TokenLaunch: React.FC = () => {
                 </div>
               ))}
             </div>
+            <div className="flex flex-wrap justify-center gap-6 pt-2">
+              <a
+                href={LINKS.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#D4AF37] text-black px-8 py-4 comic-border font-comic text-2xl comic-shadow-hover transition-all"
+              >
+                GET UPDATES IN TELEGRAM
+              </a>
+            </div>
           </div>
         ) : (
           <div className="space-y-8">
             <div className="bg-[#D12B2B] inline-block px-12 py-4 comic-border animate-pulse transform -rotate-2">
-               <span className="font-comic text-5xl uppercase text-white">February 14</span>
+               <span className="font-comic text-5xl uppercase text-white">LAUNCHED</span>
             </div>
             <div className="flex flex-wrap justify-center gap-6 pt-4">
-              <a href={LINKS.pump} className="bg-[#D4AF37] text-black px-8 py-4 comic-border font-comic text-2xl comic-shadow-hover transition-all">BUY / CHART</a>
-              <a href={LINKS.dex} className="bg-white text-black px-8 py-4 comic-border font-comic text-2xl comic-shadow-hover transition-all">DEXSCREENER</a>
-              <a href={LINKS.raydium} className="bg-white text-black px-8 py-4 comic-border font-comic text-2xl comic-shadow-hover transition-all">RAYDIUM</a>
+              {liveLinks.length > 0 ? (
+                liveLinks.map((l) => (
+                  <a
+                    key={l.label}
+                    href={l.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${l.className} px-8 py-4 comic-border font-comic text-2xl comic-shadow-hover transition-all`}
+                  >
+                    {l.label}
+                  </a>
+                ))
+              ) : (
+                <a
+                  href={LINKS.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#D4AF37] text-black px-8 py-4 comic-border font-comic text-2xl comic-shadow-hover transition-all"
+                >
+                  LINKS IN TELEGRAM
+                </a>
+              )}
             </div>
           </div>
         )}
@@ -80,7 +152,7 @@ export const TokenLaunch: React.FC = () => {
           </div>
           <div className="col-span-2 md:col-span-1 bg-white/5 p-4 comic-border border-white/10">
             <p className="text-[#D4AF37] text-[10px] font-black uppercase">Status</p>
-            <p className="font-bold text-lg">{timeLeft.isLaunched ? 'ACTIVE' : 'PRE-LAUNCH'}</p>
+            <p className="font-bold text-lg">{statusLabel}</p>
           </div>
           <div className="col-span-2 md:col-span-3 bg-white/5 p-4 comic-border border-white/10">
             <p className="text-[#D4AF37] text-[10px] font-black uppercase">Contract Address</p>

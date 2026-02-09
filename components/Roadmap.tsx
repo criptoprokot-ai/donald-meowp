@@ -23,7 +23,7 @@ export const Roadmap: React.FC = () => {
                 {p.phase}
               </div>
               <h3 className="font-comic text-2xl mt-2 mb-2">{p.title}</h3>
-              <p className="text-sm font-bold text-gray-600">{p.desc}</p>
+              <p className="text-sm font-semibold text-gray-700 leading-snug">{p.desc}</p>
             </div>
           ))}
         </div>

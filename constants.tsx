@@ -1,6 +1,4 @@
 
-import React from 'react';
-
 export const COLORS = {
   gold: '#D4AF37',
   red: '#D12B2B',
@@ -77,9 +75,9 @@ export const ASSETS = {
     '/sticker-1.jpg',
     '/sticker-2.jpg',
     '/sticker-3.jpg',
-    '/sticker-4.jpg',
   ],
   panels: COMIC_PANELS,
 };
 
-export const LAUNCH_DATE = new Date('2025-02-07T22:00:00+03:00').getTime(); // 22:00 MSK
+// Token launch: 2026-02-14 22:00 MSK (UTC+3).
+export const LAUNCH_DATE: number | null = new Date('2026-02-14T22:00:00+03:00').getTime();
